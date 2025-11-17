@@ -23,7 +23,7 @@ if(process.env.NODE_ENV != "production"){
 const dbUrl = process.env.ATLASDB_URL;
 // Mongoose Connection with Server (Express.Js);
 async function main() {
-   await mongoose.connect(dburl);
+   await mongoose.connect(dbUrl);
 }
 main().then(()=>{
     console.log("connected to DB");
