@@ -96,7 +96,10 @@ app.use("/api",userRoute);
 const footerRoute = require("./routes/footer.js");
 app.use("/api" , footerRoute);
 
-
+// Home Route 
+app.get("/", (req, res) => {
+    res.redirect("/api/listings");
+});
 // Error Handling Middleware 
 app.use((err,req,res,next)=>{
     const { status = 500, msg = "Something went wrong!" } = err;
@@ -105,4 +108,4 @@ app.use((err,req,res,next)=>{
 
 app.listen(3000,()=>{
     console.log("Server is listening to port 3000");
-})
+});
