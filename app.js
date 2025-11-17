@@ -23,7 +23,7 @@ if(process.env.NODE_ENV != "production"){
 const dbUrl = process.env.ATLASDB_URL;
 // Mongoose Connection with Server (Express.Js);
 async function main() {
-   await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust")
+   await mongoose.connect(dburl);
 }
 main().then(()=>{
     console.log("connected to DB");
