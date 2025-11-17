@@ -1,0 +1,173 @@
+<!-- <% layout("./layouts/boilerplate") %>
+<div class="row mt-3">
+    <h1 class="col-6 offset-4">SignUp on Wanderlust</h1>
+    <div class="col-6 md-8 mt-3 offset-3">
+        <form action="/api/signup" class="needs-validation" method="POST" novalidate>
+            <div class="mb-3">
+                    <label for="Username" class="form-label">Username</label>
+                    <input type="text" name="username" placeholder="Username" class="form-control" required>
+                    <div class="valid-feedback">Looks Perfect</div>
+                    <div class="invalid-feedback">Enter the Username first!</div>
+            </div>
+            <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" placeholder="Email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" placeholder="Password" class="form-control" required>
+            </div>
+            <button class="btn btn-success mt-1 mb-3" >SingUp</button>
+        </form>
+    </div>
+</div> -->
+
+<% layout("./layouts/boilerplate") %>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+  
+  /* Smooth fade-up transition */
+  .signup-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease-out forwards;
+    border-radius: 1rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .signup-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .signup-heading {
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 0.5px;
+  }
+
+  .form-control {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    border-radius: 0.6rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #198754;
+    box-shadow: 0 0 4px rgba(25, 135, 84, 0.3);
+  }
+
+  .btn-signup {
+  background-color: #198754;
+  color: #fff;  /* white text */
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+.btn-signup:hover {
+  background-color: #157347; /* slightly darker green */
+  transform: translateY(-2px);
+}
+
+
+  .btn-signup:hover {
+    background-color: #146c43;
+    transform: translateY(-2px);
+  }
+
+  .login-link a {
+    color: #007bff;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .login-link a:hover {
+    color: #157347;
+    text-decoration: underline;
+  }
+</style>
+
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm border-0 p-4 signup-card">
+        <h2 class="text-center mb-4 signup-heading">Sign Up on WanderLust</h2>
+
+        <form action="/api/signup" method="POST" class="needs-validation" novalidate>
+          <!-- Username -->
+          <div class="mb-3">
+            <label for="username" class="form-label fw-semibold">Username</label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              placeholder="Enter your username" 
+              class="form-control" 
+              required
+            >
+            <div class="invalid-feedback">Please enter your username.</div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label fw-semibold">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="Enter your email" 
+              class="form-control" 
+              required
+            >
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label for="password" class="form-label fw-semibold">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Create a password" 
+              class="form-control" 
+              required
+            >
+            <div class="invalid-feedback">Password is required.</div>
+          </div>
+
+          <!-- Button -->
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-signup btn-lg">
+              Sign Up
+            </button>
+          </div>
+
+          <!-- Redirect -->
+          <div class="text-center mt-3 login-link">
+            <p class="mb-0">
+              Already have an account?
+              <a href="/api/login">Login here</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

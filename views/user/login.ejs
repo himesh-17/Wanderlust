@@ -1,0 +1,123 @@
+<% layout("./layouts/boilerplate") %>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+
+  /* Smooth fade-in and lift transition */
+  .login-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease-out forwards;
+    border-radius: 1rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .login-heading {
+    font-weight: 700;
+    color: #111;
+    letter-spacing: 0.5px;
+  }
+
+  .form-control {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    border-radius: 0.6rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+  }
+
+ .btn-login {
+  background-color: #0d6efd;
+  color: #fff;  /* white text for contrast */
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+.btn-login:hover {
+  background-color: #0b5ed7; /* slightly darker on hover */
+  transform: translateY(-2px);
+}
+  .signup-text a {
+    color: #198754;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .signup-text a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+</style>
+
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm border-0 login-card">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4 login-heading">Login</h2>
+
+          <form action="/api/login" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                class="form-control" 
+                placeholder="Enter your username" 
+                required
+              >
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="form-control" 
+                placeholder="Enter your password" 
+                required
+              >
+            </div>
+
+            <button type="submit" class="btn btn-login w-100 py-2 mt-3 mb-3">
+              Log In
+            </button>
+
+            <div class="text-center signup-text">
+              <p class="mb-0">
+                Don’t have an account?
+                <a href="/api/signup">Sign up here</a>
+              </p>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

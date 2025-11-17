@@ -1,0 +1,183 @@
+<% layout("./layouts/boilerplate") %>
+
+<style>
+  /* Animations */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Card + Image */
+  .show-img {
+    height: 350px;
+    object-fit: cover;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    transition: transform 0.4s ease;
+  }
+
+  .listing-card:hover .show-img {
+    transform: scale(1.03);
+  }
+
+  .listing-card {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .listing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Buttons */
+  .btn-animated {
+    transition: all 0.3s ease;
+  }
+
+  .btn-animated:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.25);
+  }
+
+  /* Map section */
+  #map {
+    width: 100%;
+    height: 350px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .map-card {
+    animation: fadeUp 0.8s ease forwards;
+    padding: 20px;
+  }
+
+  h3, h4 { color: #212529; }
+  .fw-semibold { font-weight: 600; }
+</style>
+<script>
+  const data = <%- JSON.stringify(data) %>;
+</script>
+<div class="container my-5 fade-up">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+
+      <!-- Title -->
+      <h3 class="text-center fw-bold mb-4"><%= data.title %></h3>
+
+      <!-- Main Listing Card -->
+      <div class="card listing-card shadow-sm">
+        <img src="<%= data.image.url %>" class="card-img-top show-img" alt="Listing Image">
+
+        <div class="card-body">
+          <p class="mb-2 text-muted small">
+            <i class="fa-solid fa-user me-2"></i>Owned by <strong><%= data.owner.username %></strong>
+          </p>
+
+          <p class="card-text mb-3"><%= data.description %></p>
+
+          <div>
+            <p class="fw-semibold mb-1 fs-5">₹<%= data.price.toLocaleString("en-IN") %></p>
+
+            <p class="mb-1 text-capitalize">
+              <i class="fa-solid fa-tags me-2 text-primary"></i>
+              <strong>Category:</strong> <%= data.category %>
+            </p>
+
+            <p class="mb-0">
+              <i class="fa-solid fa-location-dot text-danger me-2"></i>
+              <%= data.location %>, <%= data.country %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <% if (currUser && currUser._id.equals(data.owner._id)) { %>
+        <div class="d-flex justify-content-between mt-4">
+          <a href="/api/listings/<%= data.id %>/edit" class="btn btn-dark col-5 btn-animated">Edit</a>
+          <form action="/api/listings/<%= data.id %>?_method=DELETE" method="POST" class="col-5">
+            <button class="btn btn-danger w-100 btn-animated">Delete</button>
+          </form>
+        </div>
+      <% } %>
+
+      <!-- Review Form -->
+      <% if (currUser) { %>
+        <hr class="my-5">
+        <div class="review-section">
+          <h4 class="fw-bold mb-4">Add a Review</h4>
+
+          <form action="/api/listings/<%= data.id %>/reviews" method="POST" class="needs-validation" novalidate>
+            <div class="mb-4">
+              <label for="rating" class="form-label fw-semibold">Rating</label>
+              <input type="range" min="1" max="5" id="rating" name="rating" class="form-range">
+            </div>
+
+            <div class="mb-4">
+              <label for="comment" class="form-label fw-semibold">Comment</label>
+              <textarea name="comment" id="comment" rows="4" class="form-control" required></textarea>
+              <div class="invalid-feedback">Please add a comment before submitting.</div>
+            </div>
+
+            <button class="btn btn-outline-dark px-4 btn-animated">Submit</button>
+          </form>
+        </div>
+      <% } %>
+
+      <!-- Reviews -->
+      <hr class="my-5">
+      <div class="all-reviews">
+        <h4 class="fw-bold mb-4">All Reviews</h4>
+
+        <div class="row">
+          <% if (data.reviews.length === 0) { %>
+            <p class="text-muted fst-italic">No reviews yet. Be the first to leave one!</p>
+          <% } else { %>
+            <% for (review of data.reviews) { %>
+              <div class="col-md-5 col-sm-6 mb-4">
+                <div class="card shadow-sm h-100 border-0">
+                  <div class="card-body">
+                    <h6 class="fw-semibold mb-2">
+                      <i class="fa-solid fa-user me-2"></i><%= review.author.username %>
+                    </h6>
+                    <p class="mb-2"><%= review.comment %></p>
+                    <p class="text-warning mb-0"><%= review.rating %> ⭐</p>
+                  </div>
+
+                  <% if (currUser && currUser._id.equals(review.author._id)) { %>
+                    <form action="/api/listings/<%= data.id %>/review/<%= review.id %>?_method=DELETE" method="POST" class="m-3">
+                      <button class="btn btn-sm btn-outline-danger w-100 btn-animated">Delete</button>
+                    </form>
+                  <% } %>
+                </div>
+              </div>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Map Section -->
+      <hr class="my-5">
+      <div class="map-card">
+        <h4 class="fw-bold mb-3">Where you'll be</h4>
+        <div id="map"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script src="/JS/map.js"></script>

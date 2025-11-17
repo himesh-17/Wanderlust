@@ -1,0 +1,152 @@
+<% layout("./layouts/boilerplate") %>
+
+<style>
+  :root {
+    --main-color: #fe424d;
+  }
+
+  /* ===== Smooth Page Transition (Same as Index Page) ===== */
+  body {
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  body.loaded {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ===== Card & Form Styling ===== */
+  .add-listing-card {
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .add-listing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .add-btn {
+    background-color: var(--main-color);
+    color: #fff !important;
+    font-weight: 500;
+    padding: 0.6rem 2rem;
+    border: none;
+    border-radius: 6px;
+    transition: all 0.25s ease-in-out;
+  }
+
+  .add-btn:hover {
+    background-color: #e63b46;
+    transform: translateY(-2px);
+  }
+
+  .form-label {
+    font-weight: 600;
+  }
+
+  .form-control:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.25);
+  }
+
+  .page-heading {
+    color: var(--main-color);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+</style>
+
+<!-- ===== Same JS Transition Trigger as Index Page ===== -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("loaded");
+  });
+</script>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card add-listing-card p-4 p-md-5">
+        <h3 class="mb-4 text-center page-heading">
+          <i class="fa-solid fa-plus me-2"></i>Create a New Listing
+        </h3>
+
+        <form action="/api/listings" class="needs-validation" method="POST" novalidate enctype="multipart/form-data">
+
+          <!-- Title -->
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" id="title" placeholder="Add the name" class="form-control" required>
+            <div class="valid-feedback">Looks perfect!</div>
+            <div class="invalid-feedback">Enter the title first.</div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" placeholder="About the place" class="form-control" rows="3" required></textarea>
+            <div class="valid-feedback">Nice description!</div>
+            <div class="invalid-feedback">Enter a description.</div>
+          </div>
+
+          <!-- Image -->
+          <div class="mb-3">
+            <label for="image" class="form-label">Add Image</label>
+            <input type="file" name="image" id="image" placeholder="Enter image URL/link" class="form-control">
+          </div>
+
+          <!-- Price + Country -->
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="price" class="form-label">Price (&#8377;)</label>
+              <input type="number" name="price" id="price" placeholder="12,000" class="form-control" required>
+              <div class="valid-feedback">Perfect pricing!</div>
+              <div class="invalid-feedback">Enter the price per night.</div>
+            </div>
+
+            <div class="mb-3 col-md-8">
+              <label for="country" class="form-label">Country</label>
+              <input type="text" name="country" id="country" placeholder="India" class="form-control" required>
+              <div class="valid-feedback">Looks valid!</div>
+              <div class="invalid-feedback">Enter the country name.</div>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="mb-4">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" name="location" id="location" placeholder="Gwalior, MP" class="form-control" required>
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Enter the location.</div>
+          </div>
+          <label class="form-label">Category</label>
+        <select name="category" class="form-select" required>
+          <option value="trending">Trending</option>
+          <option value="stays">Stays</option>
+          <option value="hotels">Hotels</option>
+          <option value="adventure">Adventure</option>
+          <option value="beach">Beach</option>
+          <option value="urban">Urban</option>
+          <option value="nature">Nature</option>
+          <option value="lake">Lake</option>
+          <option value="camp">Camp</option>
+          <option value="private">Private</option>
+          <option value="arctic">Arctic</option>
+          <option value="global">Global</option>
+        </select>
+
+
+          <!-- Submit Button -->
+          <div class="text-center">
+            <button class="btn add-btn mt-2 px-4" type="submit">Add Listing</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

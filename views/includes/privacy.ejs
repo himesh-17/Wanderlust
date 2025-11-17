@@ -1,0 +1,91 @@
+<% layout("layouts/boilerplate") %>
+
+<style>
+  /* Smooth fade-up transition */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Button hover transition */
+  .btn-animated {
+    transition: all 0.3s ease;
+  }
+
+  .btn-animated:hover {
+    background-color: #0d6efd;
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  }
+</style>
+
+<div class="container py-5 fade-up">
+  <div class="text-center mb-5">
+    <h1 class="fw-bold display-5 text-primary">Privacy Policy</h1>
+    <p class="text-muted">Last updated: <%= new Date().toLocaleDateString() %></p>
+  </div>
+
+  <div class="card shadow-sm border-0 p-4">
+    <h3 class="text-dark mb-3">1. Information We Collect</h3>
+    <p>
+      <strong>WanderLust</strong> collects personal information such as name, email address, and usage data
+      to enhance user experience and improve our services. We only collect data necessary to provide
+      and maintain our platform.
+    </p>
+
+    <h3 class="text-dark mt-4 mb-3">2. How We Use Your Information</h3>
+    <p>
+      We use the collected data to personalize your experience, improve website functionality, and
+      communicate updates or offers. Your information will never be sold or rented to third parties.
+    </p>
+
+    <h3 class="text-dark mt-4 mb-3">3. Cookies and Tracking Technologies</h3>
+    <p>
+      Our site may use cookies to store user preferences and improve loading speed. You can disable
+      cookies in your browser settings, but some features may not function properly as a result.
+    </p>
+
+    <h3 class="text-dark mt-4 mb-3">4. Data Security</h3>
+    <p>
+      We implement industry-standard security measures to protect your information from unauthorized
+      access, disclosure, alteration, or destruction. However, no online system is 100% secure.
+    </p>
+
+    <h3 class="text-dark mt-4 mb-3">5. Third-Party Services</h3>
+    <p>
+      <strong>WanderLust</strong> may use third-party tools for analytics or communication purposes. These
+      providers have their own privacy policies, and we encourage you to review them for more details.
+    </p>
+
+    <h3 class="text-dark mt-4 mb-3">6. Your Rights</h3>
+    <p>
+      You may request access, correction, or deletion of your personal information by contacting us.
+      We respect your privacy and will process requests in accordance with applicable laws.
+    </p>
+
+    <h3 class="text-dark mt-4 mb-3">7. Policy Updates</h3>
+    <p>
+      We may update this Privacy Policy periodically. Any changes will be reflected on this page with
+      the updated effective date.
+    </p>
+
+    <h3 class="text-dark mt-4 mb-3">8. Contact Us</h3>
+    <p>
+      For questions or concerns about this Privacy Policy, reach out at
+      <a href="mailto:himeshbadlani17@gmail.com">himeshbadlani17@gmail.com</a>.
+    </p>
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="/api/listings" class="btn btn-outline-primary rounded-pill px-4 btn-animated">Back to Home</a>
+  </div>
+</div>

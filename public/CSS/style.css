@@ -1,0 +1,202 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
+/* Navbar */
+/* Overall Navbar Height & Clean Look */
+.custom-nav {
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+/* Brand Styling - Slightly Larger */
+.wander-brand {
+  font-size: 1.35rem;
+  color: #ff385c !important; /* Airbnb-like reddish tone */
+}
+
+/* Navigation Links */
+.nav-link-custom {
+  font-size: 1rem;
+  color: #585858 !important;
+  margin-right: 12px;
+}
+
+.nav-link-custom:hover {
+  color: #ff385c !important;
+}
+
+/* SEARCH BAR */
+.search-bar {
+  background: white;
+  border: 1px solid #dddddd;
+  border-radius: 35px;
+  padding-left: 20px;
+  padding-right: 5px;
+  height: 48px;
+  width: 350px;
+  margin-right: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+.search-bar:hover {
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+/* Search Input */
+.search-input {
+  border: none !important;
+  box-shadow: none !important;
+  font-size: 0.95rem;
+}
+
+.search-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Search Button */
+.search-btn {
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ff385c;
+  color: white;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-btn i {
+  font-size: 0.9rem;
+}
+
+/* Buttons (Sign Up / Login) */
+.custom-btn {
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.primary-btn {
+  background-color: #ff385c;
+  border-color: #ff385c;
+}
+
+.primary-btn:hover {
+  background-color: #ff5779;
+  border-color: #ff5779;
+}
+
+
+/* Footer */
+.f-info-links a{
+    text-decoration: none;
+    color: #222222;
+    display: flex;
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+.f-info-links ,
+.f-info-social,
+.f-info-brand{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.f-info-social i{
+    font-size: 1.2rem;
+    margin-right: 2rem; 
+}
+.f-info-social a{
+    text-decoration: none;
+    color: #222222;
+
+}
+
+.f-info{
+    text-align: center;
+    display: flex;
+    height: 8rem;
+    background-color:#ebebeb ;
+    flex-wrap: wrap;
+    justify-content:center ;
+    align-items: space-evenly;
+
+}
+
+/* Cards = Index page */
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+
+.card-text{
+    font-weight: 400 !important;
+}
+
+.listing-link{
+    text-decoration: none;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* New-page */
+
+.add-btn {
+  background-color:#fe424d !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+.edit-btn{
+    background-color: #408ec6 !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* update-Page */
+
+.update-btn{
+    background-color: #509362 !important;
+    border: none !important;
+
+}
+/* Show Page */
+
+.show-img{
+    height: 45vh;
+}
+.btns{
+    display: flex;
+}
+.show-card{
+    padding-left:0 ;
+    padding-right: 0;
+}
+#reviewbtn {
+    margin-top: 25px;
+}
+
+

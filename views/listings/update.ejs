@@ -1,0 +1,288 @@
+<!-- <% layout("./layouts/boilerplate") %>
+<div class="row">
+    <div class="col-md-8 offset-2 mt-3">
+    <h5>Edit Your Listing </h5>
+        <form action="/api/listings/<%= listing._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" value="<%= listing.title%>" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" class="form-control" required><%= listing.description%></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="text" name="image" value="<%= listing.image %>" class="form-control" required >
+            </div>
+            <div class="row">
+            <div class="mb-3 col-md-4" >
+                <label for="price" class="form-label">Price</label>
+                <input type="number" value="<%= listing.price %>" name="price" class="form-control" required>
+            </div>
+            <div class="mb-3 col-8">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" name="country" value="<%= listing.country %>" class="form-control" required>
+            </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label> 
+                <input type="text" value="<%= listing.location %>" name="location" class="form-control" required>
+            </div>
+            <button class="btn btn-dark update-btn mt-1 mb-3">Update</button>
+        </form>
+    </div>
+</div> -->
+
+
+<% layout("./layouts/boilerplate") %>
+
+<style>
+  :root {
+    --main-green: #198754; /* Bootstrap green tone */
+  }
+ /* ===== Perfect Modern Preview Section ===== */
+  .image-preview-wrapper {
+    text-align: center;
+    margin: 20px 0 25px;
+  }
+
+  .image-preview-wrapper h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #198754;
+  }
+
+  /* Increased size — but still balanced */
+  .image-preview {
+    width: 400px;        /* was 200px */
+    height: 190px;       /* was 140px */
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #e3e3e3;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+
+  .image-preview:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  /* ===== Smooth Page Transition ===== */
+  body {
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  body.loaded {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ===== Card Styling ===== */
+  .edit-listing-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .edit-listing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .page-heading {
+    color: var(--main-green);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .form-label {
+    font-weight: 600;
+  }
+
+  .form-control:focus {
+    border-color: var(--main-green);
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+  }
+
+  .update-btn {
+    background-color: var(--main-green);
+    color: #fff;
+    font-weight: 500;
+    padding: 0.6rem 2rem;
+    border: none;
+    border-radius: 6px;
+    transition: all 0.25s ease-in-out;
+  }
+
+  .update-btn:hover {
+    background-color: #157347;
+    transform: translateY(-2px);
+  }
+  /* ===== Category Dropdown Styling ===== */
+.category-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.category-wrapper label {
+  font-weight: 600;
+}
+
+.category-wrapper select {
+  padding: 0.65rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  background-color: #fff;
+}
+
+.category-wrapper select:focus {
+  border-color: var(--main-green);
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.category-wrapper select:hover {
+  border-color: var(--main-green);
+}
+
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("loaded");
+  });
+</script>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card edit-listing-card p-4 p-md-5">
+        <h3 class="text-center mb-4 page-heading">
+          <i class="fa-solid fa-pen-to-square me-2"></i>Edit Your Listing
+        </h3>
+
+        <form 
+          action="/api/listings/<%= listing._id %>?_method=PUT" 
+          method="POST" 
+          class="needs-validation" 
+          novalidate
+          enctype="multipart/form-data"
+        >
+          <!-- Title -->
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input 
+              type="text" 
+              id="title" 
+              name="title" 
+              value="<%= listing.title %>" 
+              class="form-control" 
+              required
+            >
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea 
+              id="description" 
+              name="description" 
+              class="form-control" 
+              rows="3" 
+              required
+            ><%= listing.description %></textarea>
+          </div>
+
+          <div class="image-preview-wrapper">
+            <h3>Preview Image</h3>
+            <img src="<%= originalImage %>" class="image-preview" alt="Current Image">
+          </div>
+          <!-- Image -->
+          <div class="mb-3">
+            <label for="image" class="form-label">Upload New Image</label>
+            <input 
+              type="file" 
+              id="image" 
+              name="image" 
+              class="form-control" 
+            >
+          </div>
+
+          <!-- Price + Country -->
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="price" class="form-label">Price (&#8377;)</label>
+              <input 
+                type="number" 
+                id="price" 
+                name="price" 
+                value="<%= listing.price %>" 
+                class="form-control" 
+                required
+              >
+            </div>
+            <div class="mb-3 col-md-8">
+              <label for="country" class="form-label">Country</label>
+              <input 
+                type="text" 
+                id="country" 
+                name="country" 
+                value="<%= listing.country %>" 
+                class="form-control" 
+                required
+              >
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="mb-4">
+            <label for="location" class="form-label">Location</label>
+            <input 
+              type="text" 
+              id="location" 
+              name="location" 
+              value="<%= listing.location %>" 
+              class="form-control" 
+              required
+            >
+          </div>
+          <div class="category-wrapper">
+              <label class="form-label">Category</label>
+              <select name="category" class="form-select" required>
+                <option value="<%= listing.category %>" selected hidden>
+                  <%= listing.category %>
+                </option>
+
+                <option value="trending">Trending</option>
+                <option value="stays">Stays</option>
+                <option value="hotels">Hotels</option>
+                <option value="adventure">Adventure</option>
+                <option value="beach">Beach</option>
+                <option value="urban">Urban</option>
+                <option value="nature">Nature</option>
+                <option value="lake">Lake</option>
+                <option value="camp">Camp</option>
+                <option value="private">Private</option>
+                <option value="arctic">Arctic</option>
+                <option value="global">Global</option>
+              </select>
+          </div>
+
+          
+          <!-- Submit Button -->
+          <div class="text-center">
+            <button type="submit" class="btn update-btn mt-2 px-4">
+              Update Listing
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

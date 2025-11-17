@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top border-bottom custom-nav">
+  <div class="container-fluid px-4">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold wander-brand" href="/api/listings">
+      <i class="fa-regular fa-compass me-2"></i>WanderLust
+    </a>
+
+    <!-- Navbar Toggler -->
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+      <!-- Left Items -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link fw-semibold nav-link-custom" href="/api/listings">Explore</a>
+        </li>
+      </ul>
+
+      <!-- MODERN SEARCH BAR -->
+      <form class="search-bar d-flex align-items-center"  action="/api/listings/search" method="GET">
+        <input type="text" class="form-control search-input"
+          placeholder="Search destinations, stays..." 
+          name="q"/>
+        <button class="search-btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+
+      <!-- Right Items -->
+      <ul class="navbar-nav ms-auto align-items-center">
+
+        <a class="nav-link fw-semibold nav-link-custom" href="/api/listings/new">Become a host</a>
+
+        <% if (!currUser) { %>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary me-2 px-3 custom-btn" href="/api/signup">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary px-3 custom-btn primary-btn" href="/api/login">Login</a>
+          </li>
+        <% } %>
+
+        <% if (currUser) { %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fw-semibold nav-link-custom"
+              href="#" id="userMenu" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-regular fa-user me-1"></i> <%= currUser.username || 'Account' %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item text-danger" href="/api/logout">Logout</a></li>
+            </ul>
+          </li>
+        <% } %>
+
+      </ul>
+    </div>
+  </div>
+</nav>
